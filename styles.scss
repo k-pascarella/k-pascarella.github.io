@@ -1,0 +1,382 @@
+/*-- scss:defaults --*/
+
+// Palette ------------------------------------------------------------------
+$ink:     #16232E;
+$petrol:  #1F6F73;
+$slate:   #5A6B75;
+$mist:    #E8EDEE;
+$paper:   #FBFCFC;
+$amber:   #C98A1B;
+
+$body-bg:     $paper;
+$body-color:  $ink;
+$link-color:  $petrol;
+$primary:     $petrol;
+
+$font-family-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$font-family-monospace:  "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+$grid-body-width: 900px;
+
+$font-size-root: 17px;
+$line-height-base: 1.65;
+
+$navbar-bg: $paper;
+$navbar-fg: $ink;
+$navbar-hl: $petrol;
+
+$footer-bg: $paper;
+$footer-fg: $slate;
+
+/*-- scss:rules --*/
+
+// Type ---------------------------------------------------------------------
+body {
+  font-weight: 350;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: $ink;
+}
+
+h1.title {
+  font-size: 2.6rem;
+  line-height: 1.12;
+  margin-bottom: 0.2rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-top: 2.6rem;
+  margin-bottom: 0.8rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+h3 {
+  font-size: 1.22rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p, li { max-width: 68ch; }
+
+a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(31, 111, 115, 0.35);
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: $ink;
+    border-bottom-color: $amber;
+  }
+}
+
+// Navbar -------------------------------------------------------------------
+.navbar {
+  border-bottom: 1px solid $mist;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.navbar .navbar-brand {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  border-bottom: none;
+}
+
+.navbar .nav-link {
+  font-family: $font-family-monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  border-bottom: none;
+}
+
+// Signature: the threshold tick --------------------------------------------
+// A hairline rule carrying a single marked tick, echoing a quantile threshold
+// placed on the axis of a distribution.
+.threshold {
+  position: relative;
+  height: 1px;
+  background: $mist;
+  margin: 3.4rem 0 2.2rem 0;
+  max-width: 68ch;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    top: -5px;
+    width: 1px;
+    height: 11px;
+    background: $amber;
+  }
+
+  &::after {
+    content: attr(data-label);
+    position: absolute;
+    left: calc(12% + 10px);
+    top: -11px;
+    font-family: $font-family-monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: $slate;
+    background: $paper;
+    padding-right: 0.5rem;
+  }
+}
+
+// Hero ---------------------------------------------------------------------
+.eyebrow {
+  font-family: $font-family-monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $slate;
+  margin-bottom: 0.9rem;
+}
+
+.lede {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.4rem;
+  line-height: 1.45;
+  font-weight: 300;
+  color: $ink;
+  max-width: 60ch;
+  margin-bottom: 1.6rem;
+}
+
+// Contact / link row -------------------------------------------------------
+.linkrow {
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  margin-top: 1.4rem;
+
+  a {
+    display: inline-block;
+    margin-right: 1.4rem;
+    padding-bottom: 1px;
+    border-bottom: 1px solid rgba(31, 111, 115, 0.4);
+  }
+}
+
+// Figures ------------------------------------------------------------------
+figure, .quarto-figure { margin: 2rem 0; }
+
+figure img, p img { border: 1px solid $mist; }
+
+figcaption, .figure-caption {
+  font-family: $font-family-monospace !important;
+  font-size: 0.72rem !important;
+  line-height: 1.55;
+  color: $slate !important;
+  max-width: 68ch;
+  margin-top: 0.7rem;
+}
+
+// Entry lists (publications, roles) ----------------------------------------
+.entry {
+  max-width: 68ch;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid $mist;
+
+  &:last-child { border-bottom: none; }
+}
+
+.entry .meta {
+  font-family: $font-family-monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $slate;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+// Callout for methods notes ------------------------------------------------
+.note {
+  border-left: 2px solid $petrol;
+  padding: 0.15rem 0 0.15rem 1.1rem;
+  margin: 1.8rem 0;
+  max-width: 66ch;
+  color: $slate;
+  font-size: 0.94rem;
+}
+
+// Small print --------------------------------------------------------------
+.smallprint {
+  font-size: 0.84rem;
+  color: $slate;
+  max-width: 68ch;
+}
+
+// Math ---------------------------------------------------------------------
+.display-math { margin: 1.6rem 0; }
+
+// Footer -------------------------------------------------------------------
+.nav-footer {
+  border-top: 1px solid $mist;
+  font-family: $font-family-monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $slate;
+
+  a { border-bottom: none; }
+}
+
+// Motion -------------------------------------------------------------------
+main.content > * { animation: rise 0.5s ease-out both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.content > * { animation: none; }
+  * { transition: none !important; }
+}
+
+// Responsive ---------------------------------------------------------------
+@media (max-width: 620px) {
+  h1.title { font-size: 2rem; }
+  .lede { font-size: 1.18rem; }
+  .linkrow a { margin-right: 1rem; }
+}
+
+// ==========================================================================
+// Background: scattered colour squares behind a quiet white reading surface
+// ==========================================================================
+
+.bg-squares {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  svg { width: 100%; height: 100%; display: block; }
+}
+
+body { background: #FFFFFF; }
+
+.navbar { background: rgba(255, 255, 255, 0.88) !important; backdrop-filter: blur(6px); }
+
+main.content {
+  background: rgba(255, 255, 255, 0.965);
+  border: 1px solid rgba(22, 35, 46, 0.07);
+  padding: 2.8rem 3.2rem 3.4rem 3.2rem;
+  margin: 1.6rem 0 2.6rem 0;
+}
+
+.nav-footer { background: rgba(255, 255, 255, 0.88) !important; }
+
+@media (max-width: 720px) {
+  main.content { padding: 1.6rem 1.2rem 2.2rem 1.2rem; margin-top: 0.8rem; }
+  .bg-squares svg { opacity: 0.55; }
+}
+
+// ==========================================================================
+// Definition grid
+// ==========================================================================
+
+.defgrid {
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: $mist;
+  border: 1px solid $mist;
+  margin: 1.8rem 0 2.2rem 0;
+}
+
+.defgrid > div {
+  background: #FFFFFF;
+  padding: 1rem 1.1rem;
+}
+
+.defgrid dt, .defgrid .term {
+  font-family: $font-family-monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: $petrol;
+  margin-bottom: 0.4rem;
+}
+
+.defgrid p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: $ink;
+}
+
+@media (max-width: 620px) {
+  .defgrid { grid-template-columns: 1fr; }
+}
+
+// ==========================================================================
+// Comparison table
+// ==========================================================================
+
+.compare {
+  width: 100%;
+  max-width: none;
+  border-collapse: collapse;
+  margin: 1.8rem 0 2.2rem 0;
+  font-size: 0.9rem;
+  background: #FFFFFF;
+}
+
+.compare th, .compare td {
+  border: 1px solid $mist;
+  padding: 0.75rem 0.9rem;
+  vertical-align: top;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.compare thead th {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $ink;
+  background: rgba(31, 111, 115, 0.06);
+}
+
+.compare tbody th {
+  font-family: $font-family-monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: $slate;
+  font-weight: 400;
+  width: 21%;
+  background: rgba(22, 35, 46, 0.02);
+}
+
+@media (max-width: 620px) {
+  .compare, .compare tbody, .compare tr, .compare td, .compare th { display: block; width: auto; }
+  .compare thead { display: none; }
+  .compare tbody th { border-bottom: none; }
+  .compare td::before {
+    content: attr(data-col);
+    display: block;
+    font-family: $font-family-monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: $petrol;
+    margin-bottom: 0.3rem;
+  }
+}

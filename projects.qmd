@@ -1,0 +1,115 @@
+---
+title: "Projects"
+pagetitle: "Projects — Kaylee Pascarella"
+---
+
+::: {.lede}
+Two applied problems where the data was messy, incomplete, and attached to a decision
+somebody had to make.
+:::
+
+::: {.threshold data-label="01"}
+:::
+
+## Finding lead pipes that nobody has records for
+
+Utilities are required to inventory their water service lines and replace the old ones made
+of lead. The difficulty is that records from the early twentieth century are patchy.
+A city can end up knowing the material of some of its lines but unsure about
+thousands of others — and digging up an unknown line to find out costs time, labor, and money.
+
+Working through Baylor's Statistical Consulting Center, a fellow graduate student and I
+took on this problem for a municipal water utility. The data covered more than 14,000
+service lines. About 8,400 had a known material; roughly 6,000 did not. The question was
+which of the unknowns were likely to be, or to have once been, lead.
+
+**The statistical process.** One predictor turned out to be a perfect predictor. Every line known to
+contain lead sat on a block where another lead line had also been confirmed — the
+predictor separated the outcome perfectly. The issue with that is that ordinary logistic regression cannot cope with complete separation: the likelihood has no interior maximum, coefficients run off toward
+infinity, and standard errors become huge and meaningless. We fit **Firth logistic regression**
+instead, which penalizes the score equations using a term derived from Jeffreys' prior.
+It shrinks estimates toward zero and returns usable, stable inference in exactly this
+situation. Conventional logistic regression predicted about as well, but its parameter
+estimates were unusable.
+
+![**Illustrative.** Synthetic data showing the situation, not the project's own records.
+When one predictor divides the outcome cleanly, an unpenalized fit keeps pushing its
+coefficient upward without ever settling. Firth's penalty, derived from Jeffreys' prior,
+pulls the estimate back to a finite value with a usable standard error.](images/firth-separation.png){fig-alt="Left panel showing perfectly separated outcome classes, right panel showing a diverging unpenalized coefficient against a converging Firth estimate"}
+
+**Building the features.** Four predictors were chosen: the year the structure was built,
+the material of the nearest neighboring line, whether a lead line was confirmed on the
+same block, and each line's distance from the geographic center of the known lead lines.
+Missing construction years were filled in by multiple imputation with predictive mean
+matching, and the continuous predictors were standardized.
+
+**Validating it.** We fit all sixteen combinations of the four predictors and assessed
+each by five-fold cross-validation, stratified so every fold carried a representative
+share of the rare positive cases. Because the cost of missing a lead line is far higher
+than the cost of investigating a clean one, we classified at a deliberately conservative
+threshold rather than the default. Every model containing the block-level predictor
+identified all known lead lines with no false negatives and no false positives at that
+threshold.
+
+![Fitted coefficients from the recommended model, with 95% profile-penalized
+likelihood intervals. Two predictors carry the signal; the other two are retained for
+prediction despite intervals that cross zero.](images/lead-coefficients.png){fig-alt="Coefficient plot with intervals for the four model predictors"}
+
+**What came out of it.** Applied to the unknown lines, the recommended model flagged 306
+as likely to be or to have been lead — meaning roughly 95% of the unknown lines could be
+deprioritized rather than excavated. Our job was not to make the final call — that rests with the regulator — but to build the strongest case the data could support for where replacement effort should go. The flagged lines clustered in the older parts of the city, next to the lead lines already on record, which is what you would hope to see from a model that has learned something real.
+
+The broader lesson is that the default model won't always fit the problem, and the failure is usually informative. Here the variable that broke the fit was the best predictor we had, so the right response was to change the estimation method rather than drop the variable.
+
+::: {.smallprint}
+Joint work with a fellow graduate student, under the direction of two faculty
+statisticians. The underlying service line data belongs to the utility and is not
+reproduced here; the description above covers method and aggregate findings only.
+:::
+
+::: {.threshold data-label="02"}
+:::
+
+## Fault detection in a water treatment trailer
+
+I spent a summer as a Data Science Fellow in the MoWaTER program,
+an NSF-supported collaboration between Baylor University and the Colorado School of
+Mines. Our subject was a mobile Direct Potable Reuse trailer: a self-contained treatment
+train that takes municipal wastewater and turns it into drinking water, about 7,000
+gallons a day, while doubling as a public demonstration of what sustainable water
+treatment looks like.
+
+The trailer is heavily instrumented. Between 165 and 193 sensors record pressure, flow,
+and power every thirty seconds, across 71 operating sessions ranging from an hour to
+nineteen days. The operators wanted something specific from all that data: a way to 
+characterize regular operating conditions, and secondly how to detect faults in the system.
+
+**The shape of the data.** Both processes we focused on are
+cyclic. They run, then a backwash reverses the flow to clear accumulated debris, then
+they run again. So the natural unit of analysis is not a time point but a *cycle* — one
+complete stretch of operation between backwashes. We split the record into cycles,
+discarded everything logged during manual operation, and registered each cycle onto a
+common domain with cubic spline smoothing, so cycles of different durations could be
+compared as curves.
+
+**Finding the faults.** Treating each cycle as a function rather than a pile of
+points let us use tools from functional data analysis. For each curve we computed two
+outlyingness measures, one capturing how far its level sits from the typical cycle and
+one capturing how unusual its variability is. Plotting those pairs and drawing a bagplot
+— a two-dimensional generalization of the boxplot — isolates cycles that behave unlike
+their neighbors. Those are the candidate faults, and they showed up as visibly abnormal
+pressure curves when we went back and looked. Because the operators kept records, we could check the flags against what had actually happened to ensure that the method was catching real faults. Several corresponded to logged events: a day a valve was left running after manual operation, a session where a sensor failed mid-run.
+
+![**Visualization.** Synthetic cycles standing in for the real sensor record. Top: each
+operating cycle between backwashes, registered onto a common domain so cycles of different
+lengths can be compared as curves. Bottom: outlyingness metrics for each curve, with
+the bag covering the innermost half of cycles and the dashed fence marking the outlier
+boundary. Cycles outside the fence are the candidate faults.](images/bagplot_MO_plot.png){fig-alt="Top panel of overlaid pressure curves with outliers highlighted, bottom panel bagplot of magnitude against variance outlyingness"}
+
+We closed by recommending clustering as the next step, with early results using the
+Calinski-Harabasz criterion suggesting it would catch faults the bagplot approach missed.
+
+::: {.smallprint}
+Joint work with two other fellows, with faculty support from both institutions. Published
+as a program technical brief.
+:::

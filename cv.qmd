@@ -1,0 +1,45 @@
+---
+title: "CV"
+pagetitle: "CV — Kaylee Pascarella"
+---
+
+::: {.lede}
+Full curriculum vitae, including education, positions, publications, and technical
+skills.
+:::
+
+::: {.linkrow}
+[Download the CV (PDF)](files/Pascarella-CV.pdf)
+:::
+
+::: {.threshold data-label="Preview"}
+:::
+
+```{=html}
+<object data="files/Pascarella-CV.pdf" type="application/pdf"
+        width="100%" height="860" style="border:1px solid #E8EDEE;">
+  <p class="smallprint">
+    Your browser can't display the PDF inline.
+    <a href="files/Pascarella-CV.pdf">Download the CV instead.</a>
+  </p>
+</object>
+```
+
+::: {.threshold data-label="In short"}
+:::
+
+**Education.** PhD in Statistics, Baylor University, 2026 (advisor: John W. Seaman Jr.).
+MS in Statistics, Baylor University, 2023. BS in Statistics, Baylor University, 2022,
+magna cum laude.
+
+**Positions.** Biostatistics intern, AstraZeneca, Late Respiratory and Immunology
+Statistics, summer 2025. Biostatistics intern, Baylor Scott &amp; White Health, 2024 to
+2026. Statistical consultant, Baylor University Statistical Consulting Center, 2024.
+Data Science Fellow, MoWaTER program, 2022.
+
+**Methods.** Bayesian inference and prior specification, ICH E9(R1) estimands and
+intercurrent event strategies, clinical trial design and simulation, sample size and
+power, causal inference and G-computation, survival and longitudinal analysis, missing
+data and multiple imputation, pharmacokinetic AUC estimation, functional data analysis.
+
+**Software.** R (Stan, JAGS, tidyverse, Shiny, Quarto), SAS, Python, SQL, Git, LaTeX.

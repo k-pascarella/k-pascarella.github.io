@@ -1,0 +1,62 @@
+---
+title: "Kaylee Pascarella"
+pagetitle: "Kaylee Pascarella"
+---
+
+::: {.eyebrow}
+PhD Statistics · Austin, Texas
+:::
+
+::: {.lede}
+I'm a PhD statistician recently graduated from Baylor University. Most of my 
+training is in Bayesian methods and clinical trial estimands. My favorite part 
+of the work is that it's collaborative: the interesting problems arrive from 
+someone else, in someone else's language, and I get to use my statistical
+background to help solve them.
+:::
+
+I defended my PhD in Statistics at Baylor University in July 2026, advised by
+Dr. John W. Seaman Jr. My dissertation developed Bayesian methods for two stages
+of drug development: analyzing composite strategy estimands in confirmatory
+trials, and estimating drug exposure in preclinical studies where each animal
+contributes only a single measurement.
+
+Alongside the methodology, I have spent several years doing applied work.
+I interned with AstraZeneca's Late Respiratory and Immunology statistics group,
+giving me exposure to the real clinical trial process and its common problems. 
+I have supported clinical research at Baylor Scott &amp; White Health, and I 
+consulted through Baylor's Statistical Consulting Center on problems ranging 
+from municipal infrastructure to public health. I work mainly in R, alongside 
+SAS and Python. 
+
+::: {.linkrow}
+[Research](research.qmd) [Projects](projects.qmd) [CV](cv.qmd) [LinkedIn](https://www.linkedin.com/in/kayleepascarella) [GitHub](https://github.com/k-pascarella)
+:::
+
+::: {.threshold data-label="Contact"}
+:::
+
+Reach me by email:
+<span id="email-slot">kaylee.pascarella [at] hotmail [dot] com</span>
+
+```{=html}
+<script>
+(function () {
+  var user = "kaylee.pascarella";
+  var domain = "hotmail" + "." + "com";
+  var slot = document.getElementById("email-slot");
+  if (slot) {
+    var a = document.createElement("a");
+    a.href = "mailto:" + user + "@" + domain;
+    a.textContent = user + "@" + domain;
+    slot.textContent = "";
+    slot.appendChild(a);
+  }
+})();
+</script>
+```
+
+::: {.smallprint}
+Based in Austin, Texas. Open to biostatistics and quantitative research roles
+that are Austin-based or fully remote.
+:::
